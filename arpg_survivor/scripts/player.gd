@@ -5,6 +5,7 @@ extends CharacterBody2D
 var movement_speed = 100.0
 var is_dodging = false
 var is_meele_attacking = false
+var is_ranged_attacking = false
 var action = "idle"
 var direction = "front"
 
@@ -33,8 +34,8 @@ func _physics_process(_delta: float) -> void:
 		direction = "roll"
 	else:
 		if is_meele_attacking:
-			action = "meele"
-			direction = "attack"
+			action = "attack"
+			direction = "meele"
 		else:
 			if x_direction != 0 or y_direction != 0:
 				action = "run"
@@ -53,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 	# Dodge trigger
 	if Input.is_action_just_pressed("dodge_roll") and not is_dodging:
 		_start_dodge_roll()
-	#Meele Attack
+	# Meele Attack trigger
 	if Input.is_action_just_pressed("meele_attack") and not is_meele_attacking:
 		_start_meele_attack()
 	
@@ -66,12 +67,17 @@ func _start_dodge_roll() -> void:
 	movement_speed *= 2
 	await general_functions.wait(0.5)
 	movement_speed /= 2
-	is_dodging = false# Dodge Roll mechanic
+	is_dodging = false
 
+# Meele Attack mechanic
 func _start_meele_attack() -> void:
 	is_meele_attacking = true
 	await general_functions.wait(0.5)
 	is_meele_attacking = false
-
 	
+#Ranged attack Mechanic
+func _start_ranged_attack() -> void:
+	is_ranged_attacking = true
+	await general_functions.wait(0.5)
+	is_ranged_attacking = false
 	
