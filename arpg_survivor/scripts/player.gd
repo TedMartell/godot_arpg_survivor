@@ -2,7 +2,7 @@ extends CharacterBody2D
 @onready var general_functions = %general_functions
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-var movement_speed = 100.0
+var movement_speed = 10.0
 var is_dodging = false
 var is_meele_attacking = false
 var is_ranged_attacking = false

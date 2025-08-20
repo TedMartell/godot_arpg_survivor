@@ -357,9 +357,9 @@ radius = 1.34629
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, -8)
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"attack_ranged_front"
+animation = &"idle_front"
 autoplay = "idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

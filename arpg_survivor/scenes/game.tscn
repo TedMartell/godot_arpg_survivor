@@ -1,8 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://uqs1nrf2122r"]
+[gd_scene load_steps=7 format=4 uid="uid://uqs1nrf2122r"]
 
 [ext_resource type="PackedScene" uid="uid://b1smcpdu8l88h" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://x3vlen8vwckb" path="res://scripts/game_manager.gd" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://0u3ivt8di5p5" path="res://scripts/general_functions.gd" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://b3mr3u0paa3jr" path="res://assets/tileset_forest_1.png" id="4_lbhrr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
+texture = ExtResource("4_lbhrr")
+margins = Vector2i(16, 0)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.39576, -3.59717, 3.23746, -3.95689, 4.49647, 4.85619, -5.75548, 4.85619)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.39576, -3.59717, 4.67633, -3.77703, 6.29506, 1.25901, 4.49647, 4.85619, -5.75548, 4.85619)
+3:0/0 = 0
+4:1/0 = 0
+5:0/0 = 0
+6:1/0 = 0
+7:0/0 = 0
+8:1/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_iywne"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
 [node name="game" type="Node2D"]
 
@@ -13,9 +33,19 @@ script = ExtResource("1_yqjtg")
 unique_name_in_owner = true
 script = ExtResource("2_lnu2h")
 
-[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+[node name="Layers" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="background" type="TileMapLayer" parent="Layers"]
+tile_map_data = PackedByteArray("AAABAP//AAABAAAAAAACAP//AAACAAEAAAADAP//AAAEAAEAAAAAAP//AAAGAAEAAAD/////AAAHAAAAAAD+////AAAHAAAAAAD+//7/AAAHAAAAAAD///7/AAAHAAAAAAAAAP7/AAAHAAAAAAABAP7/AAAHAAAAAAACAP7/AAADAAAAAAACAAAAAAADAAAAAAABAAAAAAADAAAAAAAAAAAAAAAAAAEAAAD//wAAAAAAAAEAAAD+/wAAAAAAAAEAAAD9/wAAAAACAAEAAAD9////AAACAAEAAAD9//7/AAAEAAEAAAD8////AAAIAAEAAAD8/wAAAAAIAAEAAAD9/wEAAAAIAAEAAAD+/wEAAAAEAAEAAAD//wEAAAAEAAEAAAAAAAEAAAAGAAEAAAABAAEAAAABAAAAAAACAAEAAAABAAAAAAADAAAAAAABAAAAAAADAAEAAAABAAAAAAAEAAEAAAABAAAAAAAEAAAAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_iywne")
+
+[node name="player_layer" type="TileMapLayer" parent="Layers"]
+
+[node name="Player" parent="Layers/player_layer" instance=ExtResource("1_uwrxv")]
+
+[node name="Camera2D" type="Camera2D" parent="Layers/player_layer/Player"]
 position = Vector2(0, -8)
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
+
+[node name="foreground" type="TileMapLayer" parent="Layers"]
